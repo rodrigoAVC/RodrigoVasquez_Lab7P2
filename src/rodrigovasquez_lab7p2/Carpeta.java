@@ -7,13 +7,13 @@ import java.util.ArrayList;
  *
  * @author Rui
  */
-public class Carpeta{
+public class Carpeta {
+
     private String nombre, link;
     ArrayList<Archivo> archivos = new ArrayList();
     ArrayList<Carpeta> carpetas = new ArrayList();
-    
-//    private final long serialVersionUID = 234324324234L;
 
+//    private final long serialVersionUID = 234324324234L;
     public Carpeta() {
     }
 
@@ -56,9 +56,9 @@ public class Carpeta{
 
     @Override
     public String toString() {
-        return nombre + ": [Link ->" + link + ']' + " [Archivos ->" + archivos + ']' + " [Carpetas ->" + carpetas + ']';
+//        return nombre + ": [Link ->" + link + ']' + " [Archivos ->" + archivos + ']' + " [Carpetas ->" + carpetas + ']';
+        return nombre;
     }
-    
+
     //Metodos de Admin
-    
 }

@@ -4,6 +4,14 @@
  */
 package rodrigovasquez_lab7p2;
 
+import javax.swing.event.TreeSelectionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
 /**
  *
  * @author Rui
@@ -15,6 +23,21 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        FileInputStream entrada = null;
+        ObjectInputStream objeto = null;
+        admin = null;
+        try {
+            File file = new File("./archivos.rui");
+            entrada = new FileInputStream(file);
+            objeto = new ObjectInputStream(entrada);
+            admin = (adminCarpetasPrincipales) objeto.readObject();
+        } catch (Exception e) {
+            admin = new adminCarpetasPrincipales(jt_archivos, jt_archivos, jt_archivos);
+        }
+        adminBinario cosas = new adminBinario(admin);
+        cosas.start();
+        jt_archivos.setModel(admin.getJt_miUnidad().getModel());
     }
 
     /**
@@ -26,6 +49,34 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pp_root = new javax.swing.JPopupMenu();
+        jmi_agregarCarpeta = new javax.swing.JMenuItem();
+        jmi_agregarArchivo = new javax.swing.JMenuItem();
+        pp_archivo = new javax.swing.JPopupMenu();
+        jmi_ppArchivo_destacar = new javax.swing.JMenuItem();
+        jmi_ppArchivo_eliminar = new javax.swing.JMenuItem();
+        jd_crearArchivo = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        tf_nameArchivo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        cb_extension = new javax.swing.JComboBox<>();
+        ftf_sizeArchivo = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jd_crearCarpeta = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        tf_nameCarpeta = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        pp_carpeta = new javax.swing.JPopupMenu();
+        jmi_ppCarpeta_destacar = new javax.swing.JMenuItem();
+        jmi_ppCarpeta_agregarCarpeta = new javax.swing.JMenuItem();
+        jmi_ppCarpeta_agregarArchivo = new javax.swing.JMenuItem();
+        jmi_descargar = new javax.swing.JMenuItem();
+        jmi_ppCarpeta_eliminar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jl_listaCarpetas = new javax.swing.JList<>();
@@ -33,10 +84,237 @@ public class Main extends javax.swing.JFrame {
         pb_descargaTotal = new javax.swing.JProgressBar();
         jScrollPane2 = new javax.swing.JScrollPane();
         jt_archivos = new javax.swing.JTree();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        jmi_agregarCarpeta.setText("Agregar Carpeta");
+        jmi_agregarCarpeta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmi_agregarCarpetaMouseClicked(evt);
+            }
+        });
+        jmi_agregarCarpeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_agregarCarpetaActionPerformed(evt);
+            }
+        });
+        pp_root.add(jmi_agregarCarpeta);
+
+        jmi_agregarArchivo.setText("Agregar Archivo");
+        jmi_agregarArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmi_agregarArchivoMouseClicked(evt);
+            }
+        });
+        jmi_agregarArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_agregarArchivoActionPerformed(evt);
+            }
+        });
+        pp_root.add(jmi_agregarArchivo);
+
+        jmi_ppArchivo_destacar.setText("Destacar Archivo");
+        jmi_ppArchivo_destacar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmi_ppArchivo_destacarMouseClicked(evt);
+            }
+        });
+        jmi_ppArchivo_destacar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_ppArchivo_destacarActionPerformed(evt);
+            }
+        });
+        pp_archivo.add(jmi_ppArchivo_destacar);
+
+        jmi_ppArchivo_eliminar.setText("Eliminar");
+        jmi_ppArchivo_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_ppArchivo_eliminarActionPerformed(evt);
+            }
+        });
+        pp_archivo.add(jmi_ppArchivo_eliminar);
+
+        jd_crearArchivo.setMaximumSize(new java.awt.Dimension(600, 500));
+        jd_crearArchivo.setMinimumSize(new java.awt.Dimension(600, 500));
+        jd_crearArchivo.setSize(new java.awt.Dimension(600, 500));
+
+        jPanel2.setBackground(new java.awt.Color(153, 255, 153));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tf_nameArchivo.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jPanel2.add(tf_nameArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 380, 40));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Tamaño:");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("< A G R E G A R   A R C H I V O >");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Extensión:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+
+        cb_extension.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        cb_extension.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".txt", ".pdf", ".png", ".jpg", ".mp4", ".gif" }));
+        jPanel2.add(cb_extension, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 140, 40));
+
+        ftf_sizeArchivo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jPanel2.add(ftf_sizeArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 380, 40));
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Nombre:");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+
+        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jButton1.setText("Guardar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, -1, -1));
+
+        javax.swing.GroupLayout jd_crearArchivoLayout = new javax.swing.GroupLayout(jd_crearArchivo.getContentPane());
+        jd_crearArchivo.getContentPane().setLayout(jd_crearArchivoLayout);
+        jd_crearArchivoLayout.setHorizontalGroup(
+            jd_crearArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_crearArchivoLayout.setVerticalGroup(
+            jd_crearArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jd_crearCarpeta.setMaximumSize(new java.awt.Dimension(600, 400));
+        jd_crearCarpeta.setMinimumSize(new java.awt.Dimension(600, 400));
+        jd_crearCarpeta.setSize(new java.awt.Dimension(600, 400));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 153));
+        jPanel3.setMaximumSize(new java.awt.Dimension(600, 400));
+        jPanel3.setMinimumSize(new java.awt.Dimension(600, 400));
+        jPanel3.setPreferredSize(null);
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("< A G R E G A R   C A R P E T A >");
+
+        tf_nameCarpeta.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Nombre:");
+
+        jButton2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jButton2.setText("Guardar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tf_nameCarpeta))
+                            .addComponent(jLabel5)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(236, 236, 236)
+                        .addComponent(jButton2)))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(97, 97, 97)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(tf_nameCarpeta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jd_crearCarpetaLayout = new javax.swing.GroupLayout(jd_crearCarpeta.getContentPane());
+        jd_crearCarpeta.getContentPane().setLayout(jd_crearCarpetaLayout);
+        jd_crearCarpetaLayout.setHorizontalGroup(
+            jd_crearCarpetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_crearCarpetaLayout.setVerticalGroup(
+            jd_crearCarpetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jmi_ppCarpeta_destacar.setText("Destacar Carpeta");
+        pp_carpeta.add(jmi_ppCarpeta_destacar);
+
+        jmi_ppCarpeta_agregarCarpeta.setText("Agregar Carpeta");
+        jmi_ppCarpeta_agregarCarpeta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmi_ppCarpeta_agregarCarpetaMouseClicked(evt);
+            }
+        });
+        jmi_ppCarpeta_agregarCarpeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_ppCarpeta_agregarCarpetaActionPerformed(evt);
+            }
+        });
+        pp_carpeta.add(jmi_ppCarpeta_agregarCarpeta);
+
+        jmi_ppCarpeta_agregarArchivo.setText("Agregar Archivo");
+        jmi_ppCarpeta_agregarArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmi_ppCarpeta_agregarArchivoMouseClicked(evt);
+            }
+        });
+        jmi_ppCarpeta_agregarArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_ppCarpeta_agregarArchivoActionPerformed(evt);
+            }
+        });
+        pp_carpeta.add(jmi_ppCarpeta_agregarArchivo);
+
+        jmi_descargar.setText("jMenuItem1");
+        jmi_descargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_descargarActionPerformed(evt);
+            }
+        });
+        pp_carpeta.add(jmi_descargar);
+
+        jmi_ppCarpeta_eliminar.setText("Eliminar");
+        pp_carpeta.add(jmi_ppCarpeta_eliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Main");
+        setMaximumSize(new java.awt.Dimension(800, 500));
+        setMinimumSize(new java.awt.Dimension(800, 500));
+        setResizable(false);
+        setSize(new java.awt.Dimension(800, 500));
 
         jPanel1.setBackground(new java.awt.Color(168, 168, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(800, 500));
+        jPanel1.setMinimumSize(new java.awt.Dimension(800, 500));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jl_listaCarpetas.setBackground(new java.awt.Color(129, 177, 249));
         jl_listaCarpetas.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
@@ -46,61 +324,233 @@ public class Main extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jl_listaCarpetas.setMaximumSize(new java.awt.Dimension(225, 80));
+        jl_listaCarpetas.setMinimumSize(new java.awt.Dimension(225, 80));
+        jl_listaCarpetas.setPreferredSize(new java.awt.Dimension(225, 80));
+        jl_listaCarpetas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jl_listaCarpetasValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jl_listaCarpetas);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, 100));
+        jPanel1.add(pb_descarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 6, 530, 38));
+        jPanel1.add(pb_descargaTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 62, 530, 38));
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jt_archivos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_archivos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_archivosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jt_archivos);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pb_descarga, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
-                            .addComponent(pb_descargaTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(pb_descarga, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pb_descargaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 124, 380, 370));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Tamaño", "Extension"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 124, 390, 370));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jl_listaCarpetasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jl_listaCarpetasValueChanged
+        // TODO add your handling code here:
+        if (jl_listaCarpetas.getSelectedIndex() == 0 || jl_listaCarpetas.isSelectionEmpty()) {
+//            DefaultTreeModel modelo = (DefaultTreeModel) jt_archivos.getModel();
+//            modelo = (DefaultTreeModel) admin.getJt_miUnidad().getModel();
+//            modelo.reload();
+//            jt_archivos.setModel(modelo);
+            jt_archivos.setModel(admin.getJt_miUnidad().getModel());
+        } else if (jl_listaCarpetas.getSelectedIndex() == 1) {
+            DefaultTreeModel modelo = (DefaultTreeModel) jt_archivos.getModel();
+            modelo = (DefaultTreeModel) admin.getJt_destacados().getModel();
+            modelo.reload();
+            jt_archivos.setModel(modelo);
+        } else if (jl_listaCarpetas.getSelectedIndex() == 2) {
+            DefaultTreeModel modelo = (DefaultTreeModel) jt_archivos.getModel();
+            modelo = (DefaultTreeModel) admin.getJt_papelera().getModel();
+            modelo.reload();
+            jt_archivos.setModel(modelo);
+        }
+    }//GEN-LAST:event_jl_listaCarpetasValueChanged
+
+    private void jmi_agregarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmi_agregarArchivoMouseClicked
+        // TODO add your handling code here:
+        abrir_crearArchivo();
+    }//GEN-LAST:event_jmi_agregarArchivoMouseClicked
+
+    private void jmi_agregarCarpetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmi_agregarCarpetaMouseClicked
+        // TODO add your handling code here:
+        abrir_crearCarpeta();
+    }//GEN-LAST:event_jmi_agregarCarpetaMouseClicked
+
+    private void jt_archivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_archivosMouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+            int row = jt_archivos.getClosestRowForLocation(evt.getX(), evt.getY());
+            jt_archivos.setSelectionRow(row);
+            Object v1 = jt_archivos.getSelectionPath().getLastPathComponent();
+            nodo_seleccionado = (DefaultMutableTreeNode) v1;
+            if (nodo_seleccionado.getUserObject() instanceof Carpeta) {
+                pp_carpeta.show(evt.getComponent(), evt.getX(), evt.getY());
+            } else if (nodo_seleccionado.getUserObject() instanceof Archivo) {
+                pp_archivo.show(evt.getComponent(), evt.getX(), evt.getY());
+            } else {
+                pp_root.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
+    }//GEN-LAST:event_jt_archivosMouseClicked
+
+    private void jmi_ppArchivo_destacarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmi_ppArchivo_destacarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmi_ppArchivo_destacarMouseClicked
+
+    private void jmi_ppCarpeta_agregarCarpetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmi_ppCarpeta_agregarCarpetaMouseClicked
+        // TODO add your handling code here:
+        abrir_crearCarpeta();
+    }//GEN-LAST:event_jmi_ppCarpeta_agregarCarpetaMouseClicked
+
+    private void jmi_ppCarpeta_agregarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmi_ppCarpeta_agregarArchivoMouseClicked
+        // TODO add your handling code here:
+        abrir_crearArchivo();
+    }//GEN-LAST:event_jmi_ppCarpeta_agregarArchivoMouseClicked
+
+    private void jmi_agregarCarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_agregarCarpetaActionPerformed
+        // TODO add your handling code here:
+        abrir_crearCarpeta();
+    }//GEN-LAST:event_jmi_agregarCarpetaActionPerformed
+
+    private void jmi_agregarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_agregarArchivoActionPerformed
+        // TODO add your handling code here:
+        abrir_crearArchivo();
+    }//GEN-LAST:event_jmi_agregarArchivoActionPerformed
+
+    private void jmi_ppCarpeta_agregarCarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_ppCarpeta_agregarCarpetaActionPerformed
+        // TODO add your handling code here:
+        abrir_crearCarpeta();
+    }//GEN-LAST:event_jmi_ppCarpeta_agregarCarpetaActionPerformed
+
+    private void jmi_ppCarpeta_agregarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_ppCarpeta_agregarArchivoActionPerformed
+        // TODO add your handling code here:
+        abrir_crearArchivo();
+    }//GEN-LAST:event_jmi_ppCarpeta_agregarArchivoActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        if (nodo_seleccionado.getUserObject() instanceof Carpeta) {
+            String link = "";
+            Archivo newArchivo = new Archivo(tf_nameArchivo.getText(), link, cb_extension.getSelectedItem().toString(), Double.parseDouble(ftf_sizeArchivo.getText()));
+            ((Carpeta) nodo_seleccionado.getUserObject()).getArchivos().add(newArchivo);
+            JOptionPane.showMessageDialog(jd_crearArchivo, "Se ha creado el archivo");
+            tf_nameArchivo.setText("");
+            ftf_sizeArchivo.setText("");
+            jd_crearArchivo.setVisible(false);
+            nodo_seleccionado.removeAllChildren();
+            for (Archivo archivo : ((Carpeta) nodo_seleccionado.getUserObject()).getArchivos()) {
+                nodo_seleccionado.add(new DefaultMutableTreeNode(archivo));
+            }
+            for (Carpeta carpeta : ((Carpeta) nodo_seleccionado.getUserObject()).getCarpetas()) {
+                nodo_seleccionado.add(new DefaultMutableTreeNode(carpeta));
+            }
+            DefaultTreeModel modelo = (DefaultTreeModel) jt_archivos.getModel();
+            jt_archivos.setModel(modelo);
+        } else {
+            String link = "";
+            Archivo newArchivo = new Archivo(tf_nameArchivo.getText(), link, cb_extension.getSelectedItem().toString(), Double.parseDouble(ftf_sizeArchivo.getText()));
+            JOptionPane.showMessageDialog(jd_crearArchivo, "Se ha creado el archivo");
+            jd_crearArchivo.setVisible(false);
+            nodo_seleccionado.add(new DefaultMutableTreeNode(newArchivo));
+            DefaultTreeModel modelo = (DefaultTreeModel) jt_archivos.getModel();
+            jt_archivos.setModel(modelo);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        if (nodo_seleccionado.getUserObject() instanceof Carpeta) {
+            String link = "";
+            Carpeta newCarpeta = new Carpeta(tf_nameCarpeta.getText(), link);
+            ((Carpeta) nodo_seleccionado.getUserObject()).getCarpetas().add(newCarpeta);
+            JOptionPane.showMessageDialog(jd_crearArchivo, "Se ha creado la carpeta");
+            jd_crearCarpeta.setVisible(false);
+            nodo_seleccionado.removeAllChildren();
+            for (Archivo archivo : ((Carpeta) nodo_seleccionado.getUserObject()).getArchivos()) {
+                nodo_seleccionado.add(new DefaultMutableTreeNode(archivo));
+            }
+            for (Carpeta carpeta : ((Carpeta) nodo_seleccionado.getUserObject()).getCarpetas()) {
+                nodo_seleccionado.add(new DefaultMutableTreeNode(carpeta));
+            }
+            nodo_seleccionado.add(new DefaultMutableTreeNode(newCarpeta));
+            DefaultTreeModel modelo = (DefaultTreeModel) jt_archivos.getModel();
+            jt_archivos.setModel(modelo);
+        } else {
+            String link = "";
+            Carpeta newCarpeta = new Carpeta(tf_nameCarpeta.getText(), link);
+            JOptionPane.showMessageDialog(jd_crearArchivo, "Se ha creado la carpeta");
+            jd_crearCarpeta.setVisible(false);
+            nodo_seleccionado.add(new DefaultMutableTreeNode(newCarpeta));
+            DefaultTreeModel modelo = (DefaultTreeModel) jt_archivos.getModel();
+            jt_archivos.setModel(modelo);
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jmi_descargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_descargarActionPerformed
+        // TODO add your handling code here:
+//        boolean carpetas = false;
+//        boolean fin = false;
+//        while (!fin) {
+//            for (int i = 0; i < nodo_seleccionado.getChildCount(); i++) {
+//                DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) nodo_seleccionado.getChildAt(i);
+//                if (nodo.getUserObject() instanceof Carpeta) {
+//                    carpetas = true;
+//                } else {
+//                    carpetas = false;
+//                }
+//                if (carpetas) {
+//                    
+//                }
+//            }
+//        }
+
+    }//GEN-LAST:event_jmi_descargarActionPerformed
+
+    private void jmi_ppArchivo_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_ppArchivo_eliminarActionPerformed
+        // TODO add your handling code here:
+        DefaultTreeModel modelo = (DefaultTreeModel) jt_archivos.getModel();
+        DefaultTreeModel a = (DefaultTreeModel) admin.getJt_papelera().getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) a.getRoot();
+        raiz.add(nodo_seleccionado);
+        modelo.removeNodeFromParent(nodo_seleccionado);
+    }//GEN-LAST:event_jmi_ppArchivo_eliminarActionPerformed
+
+    private void jmi_ppArchivo_destacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_ppArchivo_destacarActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jmi_ppArchivo_destacarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,12 +588,62 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cb_extension;
+    private javax.swing.JFormattedTextField ftf_sizeArchivo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JDialog jd_crearArchivo;
+    private javax.swing.JDialog jd_crearCarpeta;
     private javax.swing.JList<String> jl_listaCarpetas;
+    private javax.swing.JMenuItem jmi_agregarArchivo;
+    private javax.swing.JMenuItem jmi_agregarCarpeta;
+    private javax.swing.JMenuItem jmi_descargar;
+    private javax.swing.JMenuItem jmi_ppArchivo_destacar;
+    private javax.swing.JMenuItem jmi_ppArchivo_eliminar;
+    private javax.swing.JMenuItem jmi_ppCarpeta_agregarArchivo;
+    private javax.swing.JMenuItem jmi_ppCarpeta_agregarCarpeta;
+    private javax.swing.JMenuItem jmi_ppCarpeta_destacar;
+    private javax.swing.JMenuItem jmi_ppCarpeta_eliminar;
     private javax.swing.JTree jt_archivos;
     private javax.swing.JProgressBar pb_descarga;
     private javax.swing.JProgressBar pb_descargaTotal;
+    private javax.swing.JPopupMenu pp_archivo;
+    private javax.swing.JPopupMenu pp_carpeta;
+    private javax.swing.JPopupMenu pp_root;
+    private javax.swing.JTextField tf_nameArchivo;
+    private javax.swing.JTextField tf_nameCarpeta;
     // End of variables declaration//GEN-END:variables
+
+    DefaultMutableTreeNode nodo_seleccionado;
+    adminCarpetasPrincipales admin;
+    Carpeta carpeta_seleccionada;
+    Archivo archivo_seleccionado;
+    DefaultMutableTreeNode root;
+    
+    public void abrir_crearCarpeta() {
+        jd_crearCarpeta.setModal(true);
+        jd_crearCarpeta.pack();
+        jd_crearCarpeta.setLocationRelativeTo(this);
+        jd_crearCarpeta.setVisible(true);
+    }
+    
+    public void abrir_crearArchivo() {
+        jd_crearArchivo.setModal(true);
+        jd_crearArchivo.pack();
+        jd_crearArchivo.setLocationRelativeTo(this);
+        jd_crearArchivo.setVisible(true);
+    }
 }
